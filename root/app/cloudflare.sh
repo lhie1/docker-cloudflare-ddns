@@ -50,7 +50,7 @@ getPublicIpAddress() {
 
     # if dns method fails, use http method
     if [ "$IP_ADDRESS" = "" ]; then
-      IP_ADDRESS=$(curl -sf4 https://ipinfo.io | jq -r '.ip')
+      IP_ADDRESS=$(curl -4 ip.sb)
     fi
 
     echo $IP_ADDRESS
@@ -60,7 +60,7 @@ getPublicIpAddress() {
 
     # if dns method fails, use http method
     if [ "$IP_ADDRESS" = "" ]; then
-      IP_ADDRESS=$(curl -sf6 https://ifconfig.co)
+      IP_ADDRESS=$(curl -6 ip.sb)
     fi
 
     echo $IP_ADDRESS
