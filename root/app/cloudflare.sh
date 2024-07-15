@@ -38,7 +38,7 @@ getCustomIpAddress() {
 
 getPublicIpAddress() {
   if [ "$RRTYPE" == "A" ]; then
-    IP_ADDRESS=$(curl -4 ip.sb)
+    IP_ADDRESS=$(curl -fsSL -4 ip.sb)
     if [ -z "$IP_ADDRESS" ]; then
       DNS_SERVER=${DNS_SERVER:=1.1.1.1}
       CLOUD_FLARE_IP=$(dig +short @$DNS_SERVER ch txt whoami.cloudflare +time=3 | tr -d '"')
@@ -47,7 +47,7 @@ getPublicIpAddress() {
     fi
     echo $IP_ADDRESS
   elif [ "$RRTYPE" == "AAAA" ]; then
-    IP_ADDRESS=$(curl -6 ip.sb)
+    IP_ADDRESS=$(curl -fsSL -6 ip.sb)
     if [ -z "$IP_ADDRESS" ]; then
       IP_ADDRESS=$(dig +short @2606:4700:4700::1111 -6 ch txt whoami.cloudflare | tr -d '"')
     fi
